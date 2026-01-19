@@ -33,7 +33,7 @@ export default function Login() {
 
       if (res.data.success) {
         // 🚀 Redirect to dashboard app
-        window.location.href = DASHBOARD_URL;
+        window.location.href = "/dashboard";
       }
     } catch (err) {
       alert(
