@@ -46,7 +46,7 @@ export default function Signup() {
 
         if (loginRes.data.success) {
           // 3️⃣ REDIRECT TO DASHBOARD
-          window.location.href = DASHBOARD_URL;
+          window.location.href = import.meta.env.VITE_DASHBOARD_URL;
         }
       }
     } catch (err) {
