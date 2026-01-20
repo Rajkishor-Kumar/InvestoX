@@ -35,7 +35,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 const store = MongoStore.create({
-    mongoUrl : dbUrl,
+    mongoUrl : MONGO_URL,
     crypto:{
         secret : process.env.SECRET,
     },
