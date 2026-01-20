@@ -51,7 +51,14 @@ app.use(
     store,
     secret: process.env.SESSION_SECRET || "secretkey",
     resave: false,
-    saveUninitialized: false,
+    saveUninitialized: true,
+     cookie: {
+        expires: Date.now() + 7 * 24 * 60 * 60 * 1000,
+        maxAge: 7 * 24 * 60 * 60 * 1000,
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production", // Only send cookie over HTTPS
+        sameSite: "lax" // Or "none" if cross-site cookies are needed
+    },
   })
 );
 
