@@ -3,6 +3,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const session = require("express-session");
+const MongoStore = require('connect-mongo');
 const passport = require("passport");
 
 const { HoldingsModel } = require("./models/HoldingsModel");
@@ -33,8 +34,21 @@ app.use(
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+const store = MongoStore.create({
+    mongoUrl : dbUrl,
+    crypto:{
+        secret : process.env.SECRET,
+    },
+    touchAfter: 24 * 3600,
+});
+
+store.on("error" ,(err)=>{
+    console.log("Error in Mongo Session store", err);
+})
+
 app.use(
   session({
+    store,
     secret: process.env.SESSION_SECRET || "secretkey",
     resave: false,
     saveUninitialized: false,
